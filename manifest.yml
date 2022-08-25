@@ -1,0 +1,18 @@
+applications:
+- name: rolling-crash
+  docker:
+    image: willgant1986/rolling-crash:latest
+  stack: cflinuxfs3
+  routes:
+    - route: rolling-crash.cfapps.dev06.cfar-aws.sapcloud.io  
+  processes:
+    - type: web
+      instances: 2
+      memory: 256M
+      command: npm start
+      health-check-type: http
+      health-check-http-endpoint: "/admin/health"
+      health-check-invocation-timeout: 10
+      timeout: 5
+
+
